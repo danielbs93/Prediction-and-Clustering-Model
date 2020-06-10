@@ -7,3 +7,6 @@ import pandas as pd
 import numpy as np
 import matplotlib as mtl
 import statistics as st
+
+
+path = "resource//Dataset.xlsx"
