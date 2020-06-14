@@ -1,7 +1,7 @@
 from tkinter import Tk
 
 from src.UI import Clustering
-from src.data_preprocessing import DataPreProcessing
+from src.DataPreprocessing import DataPreProcessing
 import pandas as pd
 import resource
 import os
