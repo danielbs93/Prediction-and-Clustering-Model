@@ -5,6 +5,7 @@ from sklearn import metrics
 import os
 import resource
 import pandas as pd
+from sklearn import preprocessing
 import numpy as np
 # import matplotlib as mtl
 import statistics as st
@@ -23,7 +24,7 @@ class DataPreProcessing:
         for i in dataFrame.columns:
             if i != 'country':
                 dataFrame[i] = dataFrame[i].fillna(dataFrame[i].mean())
-        standardization = ((dataFrame-dataFrame.mean())/dataFrame.std())
+        standardization = preprocessing.StandardScaler
         # numOfNull = dataFrame.apply(lambda x: sum(x.isnull()), axis=0)
         # print(dataFrame.apply(lambda x: sum(x.isnull()), axis=0))
 
