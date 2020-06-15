@@ -1,12 +1,8 @@
-from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import KFold
-from sklearn.ensemble import RandomForestClassifier
-from sklearn import metrics
 import os
 import resource
 import pandas as pd
 import numpy as np
-# import matplotlib as mtl
+import matplotlib as mtl
 import statistics as st
 
 
@@ -18,6 +14,7 @@ class DataPreProcessing:
 
     # ==========================================================================
     # read the data and insert missing values into
+
     def prepareData(self):
         self.path = os.path.join(resource.__path__[0], "Dataset.xlsx")
         dataFrame = pd.read_excel(self.path)
@@ -45,7 +42,7 @@ class DataPreProcessing:
 
         # Combining all records under country by the years and performing average on all feature's values related to it
 
-        grouped_df = (dataFrame.groupby('country').mean()).drop(columns=['year'])
+        grouped_df = pd.DataFrame((dataFrame.groupby(by='country', axis=0, as_index=False).mean())).drop(columns=['year'])
 
         # ========== CHECKING IF THE RESULTS ARE THE RIGHT OUTCOME =================
         # out_path_grouped = os.path.join(resource.__path__[0], "groupedByCountryOutPutTest.xlsx")
