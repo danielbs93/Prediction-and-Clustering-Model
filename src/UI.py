@@ -1,26 +1,51 @@
 from tkinter import *
 import tkinter as tk
-from tkinter import ttk, filedialog
+from tkinter import ttk, filedialog, messagebox
+from src.DataPreprocessing import DataPreProcessing
+# from src.DataClustering import DataClustering
+
 
 
 class Clustering:
-
-    def validate(self, new_text):
-        if not new_text:  # the field is being cleared
-            self.entered_number = 0
-            return True
-        try:
-            self.entered_number = int(new_text)
-            return True
-        except ValueError:
-            return False
+    df_preProcessing = ""
 
     def update(self, method):
         if method == "pre-process":
-            print(self.path.get())
+            try:
+                if len(self.path.get()) == 0:
+                    raise TypeError("Please insert legal path")
+                data_preprocessing = DataPreProcessing(self.path.get())
+                self.df_preProcessing = data_preprocessing.prepareData()
+                messagebox.showinfo("Pre-processing", "Preprocessing completed successfully!")
+            except OSError as err:
+                messagebox.showerror("Error", "OS error: {0}".format(err))
+            except Exception as exception:
+                messagebox.showerror("Error", exception)
+            except TypeError as exception:
+                messagebox.showerror("Error", exception)
         elif method == "cluster":
-            print("clusters: " + self.clusters.get() + " runs: " + self.runs.get())
-        else:  # reset
+            try:
+                if len(self.clusters.get()) == 0 or len(self.runs.get()) == 0:
+                    raise TypeError
+                numOfRuns = int(self.clusters.get())
+                numOfClusters = int(self.clusters.get())
+                if numOfRuns < 1 or numOfClusters < 1:
+                    raise ValueError("Please insert just positive numbers")
+                # data_clustering = DataClustering(self.df_preProcessing, numOfRuns, numOfClusters)
+                # data_clustering.runClustering()
+                image1 = tk.PhotoImage(file="../resource/k-means-clustering-on-spherical-data-1v2.png")
+                label1 = tk.Label(image=image1)
+                image2 = tk.PhotoImage(file="../resource/123.png")
+                label2 = tk.Label(image=image2)
+                label1.grid(row=15, column=17)
+                label2.grid(row=15, column=18)
+                messagebox.showinfo("Cluster", "Clustering is done")
+                root.destroy()
+            except ValueError:
+                messagebox.showerror("Error", "Please insert just positive numbers")
+            except TypeError:
+                messagebox.showerror("Error", "Please insert values to number of runs and clusters k ")
+        else:
             self.total = 0
 
 
@@ -35,14 +60,11 @@ class Clustering:
         self.clusters = tk.StringVar(root)
         self.runs = tk.StringVar(root)
 
-        def browsefunc():
+        def browseFunc():
             filename = filedialog.askopenfilename()
             self.entry_path.delete(0, tk.END)
             self.entry_path.insert(0, filename)
 
-
-
-        # vcmd = master.register(self.validate) # we have to wrap the command
 
         # LABEL #
         self.label_path = Label(master, text="Enter path:")
@@ -51,12 +73,12 @@ class Clustering:
 
         # ENTRY #
         self.entry_path = Entry(master, textvariable=self.path)
-        self.entry_clusters = Entry(master, validate="key", textvariable=self.clusters)#, validatecommand=(vcmd, '%P'))
-        self.entry_runs = Entry(master, validate="key", textvariable=self.runs)#, validatecommand=(vcmd, '%P'))
+        self.entry_clusters = Entry(master, validate="key", textvariable=self.clusters)
+        self.entry_runs = Entry(master, validate="key", textvariable=self.runs)
 
 
         # BUTTON #
-        self.browse_button = Button(root, text="Browse", command=browsefunc)
+        self.browse_button = Button(root, text="Browse", command=browseFunc)
         self.cluster_button = Button(master, text="Cluster", width=30, command=lambda: self.update("cluster"))
         self.preProcess_button = Button(master, text="Pre-process", width=30, command=lambda: self.update("pre-process"))
 
@@ -75,8 +97,8 @@ class Clustering:
 
 
 root = tk.Tk()
-root.rowconfigure(15, {'minsize': 500})
-root.columnconfigure(25, {'minsize': 850})
+root.rowconfigure(15, {'minsize': 350})
+root.columnconfigure(25, {'minsize': 750})
 my_gui = Clustering(root)
 # root.geometry("1200x600")
 root.mainloop()

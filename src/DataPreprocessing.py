@@ -14,23 +14,23 @@ class DataPreProcessing:
     path = ""
 
     def __init__(self, outer_path):
-        self.path = outer_path
+    #     self.path = outer_path
+        self.path = os.path.join(outer_path)
 
     # ==========================================================================
     # read the data and insert missing values into
     def prepareData(self):
-        self.path = os.path.join(resource.__path__[0], "Dataset.xlsx")
         dataFrame = pd.read_excel(self.path)
         # check if the data is not empty
         if dataFrame.empty:
             raise Exception('Data is empty')
-    # ==========================================================================
+        # ==========================================================================
 
         # fill na cells with average value for each numeric columns
         for i in dataFrame.columns:
             if i != 'country':
                 dataFrame[i] = dataFrame[i].fillna(dataFrame[i].mean())
-    # ==========================================================================
+        # ==========================================================================
 
         # Standardization to the values of the data set, currently not included the coulmns in the 'if' section
         for i in dataFrame.columns:
