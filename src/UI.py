@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from src.DataPreprocessing import DataPreProcessing
-# from src.DataClustering import DataClustering
+from src.DataClustering import DataClustering
 
 
 
@@ -31,14 +31,14 @@ class Clustering:
                 numOfClusters = int(self.clusters.get())
                 if numOfRuns < 1 or numOfClusters < 1:
                     raise ValueError("Please insert just positive numbers")
-                # data_clustering = DataClustering(self.df_preProcessing, numOfRuns, numOfClusters)
-                # data_clustering.runClustering()
-                image1 = tk.PhotoImage(file="../resource/k-means-clustering-on-spherical-data-1v2.png")
+                data_clustering = DataClustering(self.df_preProcessing, numOfRuns, numOfClusters)
+                data_clustering.runClustering()
+                image1 = tk.PhotoImage(file="../resource/scatter.png")
                 label1 = tk.Label(image=image1)
-                image2 = tk.PhotoImage(file="../resource/123.png")
-                label2 = tk.Label(image=image2)
+                # image2 = tk.PhotoImage(file="../resource/123.png")
+                # label2 = tk.Label(image=image2)
                 label1.grid(row=15, column=17)
-                label2.grid(row=15, column=18)
+                # label2.grid(row=15, column=18)
                 messagebox.showinfo("Cluster", "Clustering is done")
                 root.destroy()
             except ValueError:
