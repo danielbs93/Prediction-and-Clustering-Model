@@ -70,8 +70,8 @@ class DataClustering:
         # ======================== Scatter Graph: Generosity as function of Social Support ====================================
 
         plt.scatter(X[:, 2], X[:, 5], c=y_kmeans, s=30)
-        plt.scatter(kmeans.cluster_centers_[:, 4],
-                    kmeans.cluster_centers_[:, 7],
+        plt.scatter(kmeans.cluster_centers_[:, 2],
+                    kmeans.cluster_centers_[:, 5],
                     s=80,
                     c='black',
                     alpha=0.5)
@@ -94,6 +94,7 @@ class DataClustering:
             title_text='K-Means Clustering Visualization',
         )
         # fig.show()
-        import plotly.plotly as py
-        py.sign_in("erantout", "TdZKHT7nCXU2om6Z6GTy")
-        py.image.save_as(fig, filename='choroplethMap.png')
+        # import plotly.plotly as py
+        # py.sign_in("erantout", "TdZKHT7nCXU2om6Z6GTy")
+        # py.image.save_as(fig, filename='choroplethMap.png')
+        fig.write_image('../resource/choroplethMap.png')

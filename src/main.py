@@ -7,7 +7,7 @@ import pandas as pd
 import resource
 import os
 
-outer_path = "some path"
+outer_path = "../resource/Dataset.xlsx"
 db = DataPreProcessing(outer_path)
 try:
     grouped_df = db.prepareData()
