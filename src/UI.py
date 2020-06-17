@@ -31,25 +31,32 @@ class Clustering:
                 numOfClusters = int(self.clusters.get())
                 if numOfRuns < 1 or numOfClusters < 1:
                     raise ValueError("Please insert just positive numbers")
+                if numOfClusters > 195:  # 195 is the max number of countries in the world - max number of clustering equals to amounts of dataset points
+                    raise ValueError("Please insert number of cluster smaller than 195 - number of all countries in the world")
                 data_clustering = DataClustering(self.df_preProcessing, numOfRuns, numOfClusters)
                 data_clustering.runClustering()
                 image1 = tk.PhotoImage(file="../resource/scatter.png")
                 label1 = tk.Label(image=image1)
-                # image2 = tk.PhotoImage(file="../resource/123.png")
-                # label2 = tk.Label(image=image2)
+                image2 = tk.PhotoImage(file="../resource/choroplethMap.png")
+                label2 = tk.Label(image=image2)
                 label1.grid(row=15, column=17)
-                # label2.grid(row=15, column=18)
-                messagebox.showinfo("Cluster", "Clustering is done")
-                root.destroy()
-            except ValueError:
-                messagebox.showerror("Error", "Please insert just positive numbers")
+                label2.grid(row=15, column=18)
+                msg_box = messagebox.askyesno("Cluster", "Clustering is done, would you like to exit?")
+                if msg_box == 'yes':
+                    root.destroy()
+                else:
+                    label1.grid(row=15, column=17)
+                    label2.grid(row=15, column=18)
+            except ValueError as exc:
+                messagebox.showerror("Error", "Error occurred:" + exc.__str__())
             except TypeError:
-                messagebox.showerror("Error", "Please insert values to number of runs and clusters k ")
+                messagebox.showerror("Error", "Please insert number values for the number of runs and clusters k parameters")
         else:
             self.total = 0
 
 
     def __init__(self, master):
+
         self.master = master
         master.title("K-Means Clustering")
 
