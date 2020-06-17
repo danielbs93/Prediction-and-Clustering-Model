@@ -27,7 +27,7 @@ class Clustering:
             try:
                 if len(self.clusters.get()) == 0 or len(self.runs.get()) == 0:
                     raise TypeError
-                numOfRuns = int(self.clusters.get())
+                numOfRuns = int(self.runs.get())
                 numOfClusters = int(self.clusters.get())
                 if numOfRuns < 1 or numOfClusters < 1:
                     raise ValueError("Please insert just positive numbers")
@@ -42,11 +42,13 @@ class Clustering:
                 label1.grid(row=15, column=17)
                 label2.grid(row=15, column=18)
                 msg_box = messagebox.askyesno("Cluster", "Clustering is done, would you like to exit?")
-                if msg_box == 'yes':
+                if msg_box:
                     root.destroy()
                 else:
-                    label1.grid(row=15, column=17)
-                    label2.grid(row=15, column=18)
+                    root.wait_window(root)
+                    # if 'normal' == root.state():
+                    #     label1.grid(row=15, column=17)
+                    #     label2.grid(row=15, column=18)
             except ValueError as exc:
                 messagebox.showerror("Error", "Error occurred:" + exc.__str__())
             except TypeError:
@@ -94,18 +96,18 @@ class Clustering:
         self.label_clusters.grid(row=2, column=0, sticky=W)
         self.label_runs.grid(row=3, column=0, sticky=W)
 
-        self.entry_path.grid(row=1, column=1, columnspan=25, sticky=W+E)
+        self.entry_path.grid(row=1, column=1, columnspan=3, sticky=W+E)
         self.entry_clusters.grid(row=2, column=1, columnspan=3, sticky=W+E)
         self.entry_runs.grid(row=3, column=1, columnspan=3, sticky=W+E)
 
-        self.browse_button.grid(row=1, column=35)
-        self.preProcess_button.grid(row=4, column=2, columnspan=15, sticky=W+E)
+        self.browse_button.grid(row=1, column=4)
+        self.preProcess_button.grid(row=4, column=2, sticky=W+E)
         self.cluster_button.grid(row=5, column=2)
 
 
 root = tk.Tk()
 root.rowconfigure(15, {'minsize': 350})
-root.columnconfigure(25, {'minsize': 750})
+root.columnconfigure(18, {'minsize': 800})
 my_gui = Clustering(root)
 # root.geometry("1200x600")
 root.mainloop()
