@@ -81,7 +81,7 @@ class DataClustering:
         # plt.show()
         # if os.path.exists("../resource/scatter.png"):
         #     os.remove("../resource/scatter.png")
-        plt.savefig("../resource/scatter.png", dpi=100)
+        plt.savefig("../resource/scatter.png", dpi=70)
 
         # ====================== Choropleth Map ============================
 

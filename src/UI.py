@@ -19,9 +19,9 @@ class Clustering:
                 messagebox.showinfo("Pre-processing", "Preprocessing completed successfully!")
             except OSError as err:
                 messagebox.showerror("Error", "OS error: {0}".format(err))
-            except Exception as exception:
-                messagebox.showerror("Error", exception)
             except TypeError as exception:
+                messagebox.showerror("Error", exception)
+            except Exception as exception:
                 messagebox.showerror("Error", exception)
         elif method == "cluster":
             try:
@@ -31,8 +31,10 @@ class Clustering:
                 numOfClusters = int(self.clusters.get())
                 if numOfRuns < 1 or numOfClusters < 1:
                     raise ValueError("Please insert just positive numbers")
-                if numOfClusters > 195:  # 195 is the max number of countries in the world - max number of clustering equals to amounts of dataset points
-                    raise ValueError("Please insert number of cluster smaller than 195 - number of all countries in the world")
+                if numOfClusters > 195:  # 195 is the max number of countries in the world - max number of clustering
+                    # equals to amounts of dataset points
+                    raise ValueError("Please insert number of cluster smaller than 195 - number of all countries in "
+                                     "the world")
                 data_clustering = DataClustering(self.df_preProcessing, numOfRuns, numOfClusters)
                 data_clustering.runClustering()
                 image1 = tk.PhotoImage(file="../resource/scatter.png")
@@ -42,15 +44,15 @@ class Clustering:
                 label1.grid(row=15, column=17)
                 label2.grid(row=15, column=18)
                 msg_box = messagebox.askyesno("Cluster", "Clustering is done, would you like to exit?")
-                if msg_box == 'yes':
+                if msg_box:
                     root.destroy()
                 else:
-                    label1.grid(row=15, column=17)
-                    label2.grid(row=15, column=18)
+                    root.wait_window(root)
             except ValueError as exc:
                 messagebox.showerror("Error", "Error occurred:" + exc.__str__())
             except TypeError:
-                messagebox.showerror("Error", "Please insert number values for the number of runs and clusters k parameters")
+                messagebox.showerror("Error", "Please insert number values for the number of runs and clusters k "
+                                              "parameters")
         else:
             self.total = 0
 
