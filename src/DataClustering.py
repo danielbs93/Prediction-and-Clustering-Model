@@ -94,7 +94,6 @@ class DataClustering:
             title_text='K-Means Clustering Visualization',
         )
         # fig.show()
-        # import plotly.plotly as py
-        # py.sign_in("erantout", "TdZKHT7nCXU2om6Z6GTy")
-        # py.image.save_as(fig, filename='choroplethMap.png')
-        fig.write_image('../resource/choroplethMap.png')
+        import chart_studio.plotly as py
+        py.sign_in("erantout", "TdZKHT7nCXU2om6Z6GTy")
+        py.image.save_as(fig, filename='../resource/choroplethMap.png')
