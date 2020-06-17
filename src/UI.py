@@ -37,12 +37,16 @@ class Clustering:
                 data_clustering.runClustering()
                 image1 = tk.PhotoImage(file="../resource/scatter.png")
                 label1 = tk.Label(image=image1)
-                # image2 = tk.PhotoImage(file="../resource/123.png")
-                # label2 = tk.Label(image=image2)
+                image2 = tk.PhotoImage(file="../resource/choroplethMap.png")
+                label2 = tk.Label(image=image2)
                 label1.grid(row=15, column=17)
-                # label2.grid(row=15, column=18)
-                messagebox.showinfo("Cluster", "Clustering is done")
-                root.destroy()
+                label2.grid(row=15, column=18)
+                msg_box = messagebox.askyesno("Cluster", "Clustering is done, would you like to exit?")
+                if msg_box == 'yes':
+                    root.destroy()
+                else:
+                    label1.grid(row=15, column=17)
+                    label2.grid(row=15, column=18)
             except ValueError as exc:
                 messagebox.showerror("Error", "Error occurred:" + exc.__str__())
             except TypeError:
