@@ -39,8 +39,8 @@ class Clustering:
                 label1 = tk.Label(image=image1)
                 image2 = tk.PhotoImage(file="../resource/choroplethMap.png")
                 label2 = tk.Label(image=image2)
-                label1.grid(row=15, column=17)
-                label2.grid(row=15, column=18)
+                label1.grid(row=15, column=5)
+                label2.grid(row=15, column=6)
                 msg_box = messagebox.askyesno("Cluster", "Clustering is done, would you like to exit?")
                 if msg_box:
                     root.destroy()
