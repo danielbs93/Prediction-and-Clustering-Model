@@ -1,5 +1,4 @@
 import os
-import resource
 import pandas as pd
 import numpy as np
 import matplotlib as mtl

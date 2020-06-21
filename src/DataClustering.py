@@ -1,7 +1,6 @@
 from sklearn.cluster import KMeans
 import pandas as pd
 from matplotlib import pyplot as plt
-import resource
 import os
 import plotly.express as px
 from scipy.spatial import distance
