@@ -83,7 +83,7 @@ class DataClustering:
         # plt.show()
         # if os.path.exists("../resource/scatter.png"):
         #     os.remove("../resource/scatter.png")
-        scatter = self.path + "/scatter.png"
+        scatter = os.path.dirname(self.path) + "/scatter.png"
         plt.savefig(scatter, dpi=95)
 
         # ====================== Choropleth Map ============================
@@ -99,5 +99,5 @@ class DataClustering:
         # fig.show()
         import chart_studio.plotly as py
         py.sign_in("erantout", "TdZKHT7nCXU2om6Z6GTy")
-        map = self.path + '/choroplethMap.png'
+        map = os.path.dirname(self.path) + '/choroplethMap.png'
         py.image.save_as(fig, filename=map, scale=0.75)

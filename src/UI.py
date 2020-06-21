@@ -1,3 +1,4 @@
+import os
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
@@ -35,9 +36,11 @@ class Clustering:
                     raise ValueError("Please insert number of cluster smaller than 195 - number of all countries in the world")
                 data_clustering = DataClustering(self.df_preProcessing, self.path.get(), numOfRuns, numOfClusters)
                 data_clustering.runClustering()
-                image1 = tk.PhotoImage(file="../resource/scatter.png")
+                scatter = os.path.dirname(self.path.get()) + "/scatter.png"
+                image1 = tk.PhotoImage(file=scatter)
                 label1 = tk.Label(image=image1)
-                image2 = tk.PhotoImage(file="../resource/choroplethMap.png")
+                map = os.path.dirname(self.path.get()) + "/choroplethMap.png"
+                image2 = tk.PhotoImage(file=map)
                 label2 = tk.Label(image=image2)
                 label1.grid(row=15, column=5)
                 label2.grid(row=15, column=6)

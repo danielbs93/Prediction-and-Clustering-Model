@@ -9,6 +9,7 @@ import os
 
 outer_path = "../resource/Dataset.xlsx"
 db = DataPreProcessing(outer_path)
+
 # try:
 #     grouped_df = db.prepareData()
 #     dc = DataClustering(grouped_df, 100, 3)
