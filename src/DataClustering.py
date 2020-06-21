@@ -11,11 +11,13 @@ class DataClustering:
     data_frame = ""
     number_of_runs = 5  # Default
     number_of_k_clusters = 3  # Default
+    path = ""
 
-    def __init__(self, df, n_init, n_clusters):
+    def __init__(self, df, path,  n_init, n_clusters):
         self.data_frame = df
         self.number_of_runs = n_init
         self.number_of_k_clusters = n_clusters
+        self.path = path
 
     # =================================================
 
@@ -81,7 +83,8 @@ class DataClustering:
         # plt.show()
         # if os.path.exists("../resource/scatter.png"):
         #     os.remove("../resource/scatter.png")
-        plt.savefig("../resource/scatter.png", dpi=95)
+        scatter = self.path + "/scatter.png"
+        plt.savefig(scatter, dpi=95)
 
         # ====================== Choropleth Map ============================
 
@@ -96,4 +99,5 @@ class DataClustering:
         # fig.show()
         import chart_studio.plotly as py
         py.sign_in("erantout", "TdZKHT7nCXU2om6Z6GTy")
-        py.image.save_as(fig, filename='../resource/choroplethMap.png', scale=0.75)
+        map = self.path + '/choroplethMap.png'
+        py.image.save_as(fig, filename=map, scale=0.75)

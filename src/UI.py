@@ -33,7 +33,7 @@ class Clustering:
                     raise ValueError("Please insert just positive numbers")
                 if numOfClusters > 195:  # 195 is the max number of countries in the world - max number of clustering equals to amounts of dataset points
                     raise ValueError("Please insert number of cluster smaller than 195 - number of all countries in the world")
-                data_clustering = DataClustering(self.df_preProcessing, numOfRuns, numOfClusters)
+                data_clustering = DataClustering(self.df_preProcessing, self.path.get(), numOfRuns, numOfClusters)
                 data_clustering.runClustering()
                 image1 = tk.PhotoImage(file="../resource/scatter.png")
                 label1 = tk.Label(image=image1)
